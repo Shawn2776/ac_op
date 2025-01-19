@@ -4,6 +4,7 @@ import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import { FcGoogle } from "react-icons/fc";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -33,10 +34,25 @@ const LoginForm = () => {
     }
   };
 
+  const handleGoogleSignIn = async () => {
+    try {
+      await signIn("google", { callbackUrl: "/dashboard" });
+    } catch (error) {
+      console.log("Google Sign In Error: ", error);
+    }
+  };
+
   return (
     <div className="card card-compact bg-base-100 w-96 shadow-xl">
       <div className="card-body">
         <h1 className="card-title m-auto text-2xl">Sign in to your account</h1>
+
+        <button className="btn" onClick={() => signIn("google")}>
+          <FcGoogle />
+          Sign in with Google
+        </button>
+        <p className="text-center pt-5">or</p>
+
         <form className="flex flex-col gap-4 mt-4" onSubmit={handleSubmit}>
           <label className="form-control w-full max-w-xs">
             <div className="label">
