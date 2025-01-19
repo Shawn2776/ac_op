@@ -51,13 +51,13 @@ const LoginForm = () => {
           <FcGoogle />
           Sign in with Google
         </button>
-        <div className="flex w-full items-center gap-2 py-6 text-sm text-slate-600">
+        <div className="flex w-full items-center gap-2 text-sm text-slate-600">
           <div className="h-px w-full bg-slate-200"></div>
           <span className="text-white">OR</span>
           <div className="h-px w-full bg-slate-200"></div>
         </div>
 
-        <form className="flex flex-col gap-4 mt-4" onSubmit={handleSubmit}>
+        <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
           <label className="form-control w-full max-w-xs">
             <div className="label">
               <span className="label-text">Email</span>
