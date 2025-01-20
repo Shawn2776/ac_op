@@ -86,14 +86,14 @@ export default function PublicNavbar() {
                 <button
                   type="button"
                   onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
-                  className="flex rounded-full bg-gray-800 text-sm focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                  className="flex items-center rounded-full bg-gray-800 text-sm focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                   id="user-menu-button"
                   aria-expanded={isProfileMenuOpen}
                   aria-haspopup="true"
                 >
                   <span className="sr-only">Open user menu</span>
                   <img
-                    className="h-8 w-8 rounded-full"
+                    className="h-8 w-8 rounded-full object-cover border border-gray-600"
                     src={
                       session.user.image || "https://via.placeholder.com/150"
                     }
