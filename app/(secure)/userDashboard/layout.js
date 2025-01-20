@@ -1,4 +1,4 @@
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/PublicNavbar";
 import "../../../app/globals.css";
 import { AuthProvider } from "@/Providers";
 
