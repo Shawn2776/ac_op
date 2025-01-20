@@ -10,10 +10,8 @@ const RegisterPage = async () => {
   if (session) redirect("/dashboard");
 
   return (
-    <div className="flex h-screen bg-neutral-400">
-      <div className="m-auto">
-        <LoginForm />
-      </div>
+    <div className="flex justify-center mt-40">
+      <LoginForm />
     </div>
   );
 };

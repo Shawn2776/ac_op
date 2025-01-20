@@ -9,7 +9,6 @@ export default function UserDashboardPage() {
     <div className="p-4">
       <h1 className="text-2xl font-bold">User Dashboard</h1>
       <p>Welcome, {session?.user?.email}</p>
-      {/* Display user-specific rentals and account info here */}
     </div>
   );
 }

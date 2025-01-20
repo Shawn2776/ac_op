@@ -16,8 +16,6 @@ export default function DashboardLayout({ children }) {
         <AuthProvider>
           <Navbar />
           <div className="flex min-h-screen">
-            {/* Sidebar */}
-            <Sidebar />
             {/* Main Content */}
             <main className="flex-1 p-6 bg-base-100">{children}</main>
           </div>

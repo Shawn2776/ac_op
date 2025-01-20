@@ -34,16 +34,8 @@ const LoginForm = () => {
     }
   };
 
-  const handleGoogleSignIn = async () => {
-    try {
-      await signIn("google", { callbackUrl: "/dashboard" });
-    } catch (error) {
-      console.log("Google Sign In Error: ", error);
-    }
-  };
-
   return (
-    <div className="card card-compact bg-base-100 w-96 shadow-xl">
+    <div className="card card-compact bg-base-100 w-96 ">
       <div className="card-body">
         <h1 className="card-title m-auto text-2xl">Sign in to your account</h1>
 
