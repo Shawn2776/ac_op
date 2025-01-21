@@ -87,9 +87,7 @@ const LoginForm = () => {
               </Link>
             </div>
           </div>
-          <button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg">
-            Login
-          </button>
+          <button className="btn sm:btn-sm md:btn-md">Login</button>
           <div>
             <span className="text-sm">
               Don't have an account yet?{" "}

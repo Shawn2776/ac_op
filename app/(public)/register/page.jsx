@@ -9,8 +9,16 @@ const RegisterPage = async () => {
   if (session) redirect("/dashboard");
 
   return (
-    <div className="flex h-screen bg-neutral-400">
-      <div className="m-auto">
+    <div className="flex flex-col">
+      <div className="text-center my-6">
+        <h1 className="text-primary text-3xl font-bold">
+          Enroll in the NIC Adventure Center
+        </h1>
+        <p className="text-neutral mb-6">
+          Join the adventure! Fill out the form below to start your journey.
+        </p>
+      </div>
+      <div className="flex justify-center mt-0">
         <RegisterForm />
       </div>
     </div>

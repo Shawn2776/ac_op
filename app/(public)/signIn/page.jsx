@@ -10,7 +10,7 @@ const RegisterPage = async () => {
   if (session) redirect("/dashboard");
 
   return (
-    <div className="flex justify-center mt-40">
+    <div className="flex justify-center mt-10 sm:mt-20">
       <LoginForm />
     </div>
   );

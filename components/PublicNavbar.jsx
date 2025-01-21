@@ -6,7 +6,7 @@ const PublicNavbar = () => {
   return (
     <div>
       {/* Mobile View */}
-      <div className="sm:hidden navbar bg-base-100">
+      <div className="sm:hidden navbar bg-base-100 shadow-md">
         <div className="flex-1">
           <Link className="btn btn-ghost text-xl" href="/">
             <Image
@@ -26,7 +26,7 @@ const PublicNavbar = () => {
         </div>
       </div>
       {/* Desktop View */}
-      <div className="hidden sm:flex navbar bg-base-100">
+      <div className="hidden sm:flex navbar bg-base-100 shadow-md">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
