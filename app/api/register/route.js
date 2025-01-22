@@ -5,6 +5,8 @@ import bcrypt from "bcryptjs";
 
 export async function POST(req) {
   try {
+    console.log("Request body:", req.body);
+
     // Parse request body
     const {
       firstName,
@@ -14,16 +16,35 @@ export async function POST(req) {
       streetAddress1, // Correct mapping for address fields
       streetAddress2,
       city,
-      state,
+      addrState,
       zipCode,
-      countryOfResidence,
       primaryPhoneNumber, // Correct mapping for phone
       driversLicenseNumber, // Correct mapping for driver's license
       birthDate,
       expirationDate,
-      issuingState, // Correct mapping for issuing state
+      emailSpecials, // Correct mapping for email specials
+      dlState, // Correct mapping for issuing state
       termsAccepted, // Explicitly map termsAccepted
     } = await req.json();
+
+    console.log("Parsed request body:", {
+      firstName,
+      lastName,
+      email,
+      password,
+      streetAddress1,
+      streetAddress2,
+      city,
+      addrState,
+      zipCode,
+      primaryPhoneNumber,
+      driversLicenseNumber,
+      birthDate,
+      expirationDate,
+      dlState,
+      termsAccepted,
+      emailSpecials,
+    });
 
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -40,6 +61,8 @@ export async function POST(req) {
       );
     }
 
+    const termsAcceptedDate = new Date();
+
     // Create a new user
     const newUser = await User.create({
       firstName,
@@ -49,15 +72,16 @@ export async function POST(req) {
       streetAddress1,
       streetAddress2,
       city,
-      state,
+      addrState,
       zipCode,
-      countryOfResidence,
       primaryPhoneNumber,
       driversLicenseNumber,
       birthDate,
       expirationDate,
-      issuingState,
+      dlState,
       termsAccepted,
+      termsAcceptedDate,
+      emailSpecials,
     });
 
     return NextResponse.json(

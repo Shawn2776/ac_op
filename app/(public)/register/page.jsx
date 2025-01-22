@@ -1,5 +1,4 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import RegisterForm from "@/components/RegisterForm";
 import RegisterForm2 from "@/components/RegisterForm/RegisterForm2";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
@@ -12,7 +11,6 @@ const RegisterPage = async () => {
   return (
     <div className="flex flex-col">
       <div className="flex justify-center">
-        {/* <RegisterForm /> */}
         <RegisterForm2 />
       </div>
     </div>

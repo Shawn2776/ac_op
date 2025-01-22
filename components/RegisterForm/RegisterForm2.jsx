@@ -17,13 +17,15 @@ const RegisterForm2 = () => {
   const [street1, setStreet1] = useState("");
   const [street2, setStreet2] = useState("");
   const [city, setCity] = useState("");
-  const [state, setState] = useState("");
+  const [addrState, setAddrState] = useState("");
   const [zipCode, setZipCode] = useState("");
   const [primaryPhone, setPrimaryPhone] = useState("");
   const [driversLicense, setDriversLicense] = useState("");
   const [birthDate, setBirthDate] = useState("");
+  const [dlState, setDlState] = useState("");
   const [expirationDate, setExpirationDate] = useState("");
   const [termsAccepted, setTermsAccepted] = useState(false);
+  const [termsAcceptedDate, setTermsAcceptedDate] = useState(new Date());
   const [error, setError] = useState("");
   const [emailInUse, setEmailInUse] = useState(false);
   const [currentSection, setCurrentSection] = useState(1);
@@ -78,7 +80,7 @@ const RegisterForm2 = () => {
   };
 
   const handleContactValidation = () => {
-    if (!street1 || !city || !state || !zipCode || !primaryPhone) {
+    if (!street1 || !city || !addrState || !zipCode || !primaryPhone) {
       setError("Please complete all required fields.");
       return;
     }
@@ -86,7 +88,7 @@ const RegisterForm2 = () => {
   };
 
   const handleDriverValidation = () => {
-    if (!driversLicense || !birthDate || !state || !expirationDate) {
+    if (!driversLicense || !birthDate || !dlState || !expirationDate) {
       setError("Please complete all required fields.");
       return;
     }
@@ -114,16 +116,18 @@ const RegisterForm2 = () => {
           email,
           password,
           termsAccepted,
+          termsAcceptedDate,
+          emailSpecials,
           streetAddress1: street1,
           streetAddress2: street2,
           city,
-          state,
+          addrState,
           zipCode,
           primaryPhoneNumber: primaryPhone,
           driversLicenseNumber: driversLicense,
           birthDate,
           expirationDate,
-          issuingState: state,
+          dlState,
         }),
       });
 
@@ -308,8 +312,8 @@ const RegisterForm2 = () => {
                   type="text"
                   placeholder="State"
                   className="input input-bordered w-full"
-                  value={state}
-                  onChange={(e) => setState(e.target.value)}
+                  value={addrState}
+                  onChange={(e) => setAddrState(e.target.value)}
                   required
                 />
               </div>
@@ -375,8 +379,8 @@ const RegisterForm2 = () => {
               </label>
               <select
                 className="select select-bordered w-full"
-                value={state}
-                onChange={(e) => setState(e.target.value)}
+                value={dlState}
+                onChange={(e) => setDlState(e.target.value)}
                 required
               >
                 <option value="" disabled>
