@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
-const RegisterForm = () => {
+const RegisterForm2 = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -20,12 +20,12 @@ const RegisterForm = () => {
   const [driversLicense, setDriversLicense] = useState("");
   const [birthDate, setBirthDate] = useState("");
   const [expirationDate, setExpirationDate] = useState("");
-  const [countryOfResidence, setCountryOfResidence] = useState("");
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [error, setError] = useState("");
   const [emailInUse, setEmailInUse] = useState(false);
   const [currentSection, setCurrentSection] = useState(1);
   const [unlockedSections, setUnlockedSections] = useState([1]);
+  const [emailSpecials, setEmailSpecials] = useState(true); // Checked by default
 
   const router = useRouter();
 
@@ -116,7 +116,6 @@ const RegisterForm = () => {
           city,
           state,
           zipCode,
-          countryOfResidence,
           primaryPhoneNumber: primaryPhone,
           driversLicenseNumber: driversLicense,
           birthDate,
@@ -162,6 +161,7 @@ const RegisterForm = () => {
             Join the adventure! Fill out the form below to start your journey.
           </p>
         </div>
+
         <form className="space-y-6">
           {/* My Profile Section */}
           <div
@@ -228,7 +228,7 @@ const RegisterForm = () => {
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 required
               />
-              <div className="flex justify-start mt-4">
+              <div className="flex justify-end mt-4">
                 <button
                   type="button"
                   className="btn btn-primary"
@@ -306,7 +306,7 @@ const RegisterForm = () => {
                   required
                 />
               </div>
-              <div className="flex justify-start mt-4">
+              <div className="flex justify-end mt-4">
                 <button
                   type="button"
                   className="btn btn-primary"
@@ -317,174 +317,228 @@ const RegisterForm = () => {
               </div>
             </div>
           </div>
+        </form>
 
-          {/* Driver's License Section */}
+        {/* Driver's License Section */}
+        <div
+          className={`collapse collapse-arrow border ${
+            currentSection === 3 ? "collapse-open" : ""
+          }`}
+        >
           <div
-            className={`collapse collapse-arrow border ${
-              currentSection === 3 ? "collapse-open" : ""
-            }`}
+            className="collapse-title text-lg font-medium cursor-pointer"
+            onClick={() => unlockedSections.includes(3) && setCurrentSection(3)}
           >
-            <div
-              className="collapse-title text-lg font-medium cursor-pointer"
-              onClick={() =>
-                unlockedSections.includes(3) && setCurrentSection(3)
-              }
-            >
-              Driver&apos;s License Details
+            Driver&apos;s License Details
+          </div>
+          <div className="collapse-content space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Birthdate
+              </label>
+              <input
+                type="date"
+                className="input input-bordered w-full"
+                value={birthDate}
+                onChange={(e) => setBirthDate(e.target.value)}
+                required
+              />
             </div>
-            <div className="collapse-content space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Birthdate
-                </label>
-                <input
-                  type="date"
-                  className="input input-bordered w-full"
-                  value={birthDate}
-                  onChange={(e) => setBirthDate(e.target.value)}
-                  required
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Issuing State
-                </label>
-                <select
-                  className="select select-bordered w-full"
-                  value={state}
-                  onChange={(e) => setState(e.target.value)}
-                  required
-                >
-                  <option value="" disabled>
-                    Select your state
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Issuing State
+              </label>
+              <select
+                className="select select-bordered w-full"
+                value={state}
+                onChange={(e) => setState(e.target.value)}
+                required
+              >
+                <option value="" disabled>
+                  Select your state
+                </option>
+                {[
+                  "Alabama",
+                  "Alaska",
+                  "Arizona",
+                  "Arkansas",
+                  "California",
+                  "Colorado",
+                  "Connecticut",
+                  "Delaware",
+                  "Florida",
+                  "Georgia",
+                  "Hawaii",
+                  "Idaho",
+                  "Illinois",
+                  "Indiana",
+                  "Iowa",
+                  "Kansas",
+                  "Kentucky",
+                  "Louisiana",
+                  "Maine",
+                  "Maryland",
+                  "Massachusetts",
+                  "Michigan",
+                  "Minnesota",
+                  "Mississippi",
+                  "Missouri",
+                  "Montana",
+                  "Nebraska",
+                  "Nevada",
+                  "New Hampshire",
+                  "New Jersey",
+                  "New Mexico",
+                  "New York",
+                  "North Carolina",
+                  "North Dakota",
+                  "Ohio",
+                  "Oklahoma",
+                  "Oregon",
+                  "Pennsylvania",
+                  "Rhode Island",
+                  "South Carolina",
+                  "South Dakota",
+                  "Tennessee",
+                  "Texas",
+                  "Utah",
+                  "Vermont",
+                  "Virginia",
+                  "Washington",
+                  "West Virginia",
+                  "Wisconsin",
+                  "Wyoming",
+                ].map((state) => (
+                  <option key={state} value={state}>
+                    {state}
                   </option>
-                  {[
-                    "Alabama",
-                    "Alaska",
-                    "Arizona",
-                    "Arkansas",
-                    "California",
-                    "Colorado",
-                    "Connecticut",
-                    "Delaware",
-                    "Florida",
-                    "Georgia",
-                    "Hawaii",
-                    "Idaho",
-                    "Illinois",
-                    "Indiana",
-                    "Iowa",
-                    "Kansas",
-                    "Kentucky",
-                    "Louisiana",
-                    "Maine",
-                    "Maryland",
-                    "Massachusetts",
-                    "Michigan",
-                    "Minnesota",
-                    "Mississippi",
-                    "Missouri",
-                    "Montana",
-                    "Nebraska",
-                    "Nevada",
-                    "New Hampshire",
-                    "New Jersey",
-                    "New Mexico",
-                    "New York",
-                    "North Carolina",
-                    "North Dakota",
-                    "Ohio",
-                    "Oklahoma",
-                    "Oregon",
-                    "Pennsylvania",
-                    "Rhode Island",
-                    "South Carolina",
-                    "South Dakota",
-                    "Tennessee",
-                    "Texas",
-                    "Utah",
-                    "Vermont",
-                    "Virginia",
-                    "Washington",
-                    "West Virginia",
-                    "Wisconsin",
-                    "Wyoming",
-                  ].map((state) => (
-                    <option key={state} value={state}>
-                      {state}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Driver's License Number
-                </label>
-                <input
-                  type="text"
-                  placeholder="Enter your driver's license number"
-                  className="input input-bordered w-full"
-                  value={driversLicense}
-                  onChange={(e) => setDriversLicense(e.target.value)}
-                  required
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Expiration Date
-                </label>
-                <input
-                  type="date"
-                  className="input input-bordered w-full"
-                  value={expirationDate}
-                  onChange={(e) => setExpirationDate(e.target.value)}
-                  required
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Country of Residence
-                </label>
-                <select
-                  className="select select-bordered w-full"
-                  value={countryOfResidence}
-                  onChange={(e) => setCountryOfResidence(e.target.value)}
-                  required
-                >
-                  <option value="" disabled>
-                    Select your country
-                  </option>
-                  <option value="United States">United States</option>
-                  <option value="Canada">Canada</option>
-                </select>
-              </div>
-              <div className="flex items-start">
+                ))}
+              </select>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Driver's License Number
+              </label>
+              <input
+                type="text"
+                placeholder="Enter your driver's license number"
+                className="input input-bordered w-full"
+                value={driversLicense}
+                onChange={(e) => setDriversLicense(e.target.value)}
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Expiration Date
+              </label>
+              <input
+                type="date"
+                className="input input-bordered w-full"
+                value={expirationDate}
+                onChange={(e) => setExpirationDate(e.target.value)}
+                required
+              />
+            </div>
+
+            <div className="flex justify-end mt-4">
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={handleDriverValidation}
+              >
+                Continue
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Preferences Section */}
+        <div
+          className={`collapse collapse-arrow border ${
+            currentSection === 4 ? "collapse-open" : ""
+          }`}
+        >
+          <div
+            className="collapse-title text-lg font-medium cursor-pointer"
+            onClick={() => unlockedSections.includes(4) && setCurrentSection(4)}
+          >
+            Preferences
+          </div>
+
+          <div className="collapse-content space-y-4">
+            {/* Email Specials */}
+            <div>
+              <label className="block text-lg font-bold">
+                Email Specials (Optional)
+              </label>
+              <div className="flex items-center">
                 <input
                   type="checkbox"
                   className="checkbox"
-                  checked={termsAccepted}
-                  onChange={(e) => setTermsAccepted(e.target.checked)}
-                  required
+                  checked={emailSpecials}
+                  onChange={(e) => setEmailSpecials(e.target.checked)}
                 />
                 <span className="ml-2 text-sm">
-                  I accept the{" "}
-                  <Link href="/terms" className="text-blue-500 underline">
-                    Terms and Conditions
-                  </Link>
+                  By selecting this box, you would like to receive email
+                  promotions and offers from NIC Adventure Center. You also
+                  agree that we can use your information and interactions with
+                  emails to perform analytics and produce content and ads
+                  tailored to your interests. You may see these tailored
+                  advertisements and offers on non-NIC Adventure Center sites,
+                  including on social media and digital advertising platforms.
+                  Please understand that there is no charge and that you can
+                  unsubscribe at any time by (i) using the links provided in the
+                  emails, (ii) managing your preferences in your NIC Adventure
+                  Center profile, or (iii) contacting us. Please consult our{" "}
+                  <Link
+                    href="/privacy-policy"
+                    className="text-blue-500 underline"
+                  >
+                    Privacy Policy
+                  </Link>{" "}
+                  and{" "}
+                  <Link
+                    href="/cookie-policy"
+                    className="text-blue-500 underline"
+                  >
+                    Cookie Policy
+                  </Link>{" "}
+                  to find out more.
                 </span>
               </div>
-              <div className="flex justify-start mt-4">
-                <button
-                  type="submit"
-                  className="btn btn-primary"
-                  onClick={handleFinalSubmit}
-                >
-                  Create Account
-                </button>
-              </div>
+            </div>
+
+            {/* Terms and Conditions */}
+            <div className="flex items-start">
+              <input
+                type="checkbox"
+                className="checkbox"
+                checked={termsAccepted}
+                onChange={(e) => setTermsAccepted(e.target.checked)}
+                required
+              />
+              <span className="ml-2 text-sm">
+                I accept the{" "}
+                <Link href="/terms" className="text-blue-500 underline">
+                  Enterprise Plus Terms & Conditions
+                </Link>
+                *
+              </span>
+            </div>
+
+            {/* Submit Button */}
+            <div className="flex justify-start mt-4">
+              <button
+                type="submit"
+                className="btn btn-primary"
+                onClick={handleFinalSubmit}
+              >
+                Create Account
+              </button>
             </div>
           </div>
-        </form>
+        </div>
 
         {/* Modal */}
         {emailInUse && (
@@ -522,4 +576,4 @@ const RegisterForm = () => {
   );
 };
 
-export default RegisterForm;
+export default RegisterForm2;
