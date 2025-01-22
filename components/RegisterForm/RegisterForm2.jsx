@@ -133,7 +133,6 @@ const RegisterForm2 = () => {
 
       if (res.ok) {
         const { message } = await res.json();
-        console.log(message);
         router.push("/success"); // Redirect on success
       } else {
         const { message } = await res.json();

@@ -40,7 +40,6 @@ export const authOptions = {
             role: user.role, // Example of adding user role
           };
         } catch (error) {
-          console.log("Error: ", error);
           return null;
         }
       },

@@ -5,8 +5,6 @@ import bcrypt from "bcryptjs";
 
 export async function POST(req) {
   try {
-    console.log("Request body:", req.body);
-
     // Parse request body
     const {
       firstName,
@@ -26,25 +24,6 @@ export async function POST(req) {
       dlState, // Correct mapping for issuing state
       termsAccepted, // Explicitly map termsAccepted
     } = await req.json();
-
-    console.log("Parsed request body:", {
-      firstName,
-      lastName,
-      email,
-      password,
-      streetAddress1,
-      streetAddress2,
-      city,
-      addrState,
-      zipCode,
-      primaryPhoneNumber,
-      driversLicenseNumber,
-      birthDate,
-      expirationDate,
-      dlState,
-      termsAccepted,
-      emailSpecials,
-    });
 
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);

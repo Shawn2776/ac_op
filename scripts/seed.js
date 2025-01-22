@@ -40,7 +40,6 @@ async function seedDatabase() {
 
     // Seed Categories
     const createdCategories = await Category.insertMany(categories);
-    console.log("Categories Seeded:", createdCategories);
 
     // Map equipment categories
     const categoryMap = {};
@@ -58,7 +57,6 @@ async function seedDatabase() {
     const createdEquipment = await Equipment.insertMany(
       equipmentWithCategoryIds
     );
-    console.log("Equipment Seeded:", createdEquipment);
 
     process.exit(0);
   } catch (error) {
