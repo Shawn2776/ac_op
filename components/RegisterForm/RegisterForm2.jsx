@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const RegisterForm2 = () => {
   const [firstName, setFirstName] = useState("");
@@ -11,6 +12,8 @@ const RegisterForm2 = () => {
   const [confirmEmail, setConfirmEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [street1, setStreet1] = useState("");
   const [street2, setStreet2] = useState("");
   const [city, setCity] = useState("");
@@ -157,8 +160,14 @@ const RegisterForm2 = () => {
           <h1 className="text-primary text-3xl font-bold">
             Enroll in the NIC Adventure Center
           </h1>
-          <p className="text-neutral mb-6">
+          <p className="text-neutral mb-0">
             Join the adventure! Fill out the form below to start your journey.
+          </p>
+          <p className="text-sm text-neutral pb-4 italic">
+            Already have an account?{" "}
+            <Link href="/signIn" className="text-blue-500">
+              Sign In
+            </Link>
           </p>
         </div>
 
@@ -212,22 +221,38 @@ const RegisterForm2 = () => {
                 onChange={(e) => setConfirmEmail(e.target.value)}
                 required
               />
-              <input
-                type="password"
-                placeholder="Password"
-                className="input input-bordered w-full"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-              <input
-                type="password"
-                placeholder="Confirm Password"
-                className="input input-bordered w-full"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                required
-              />
+              <div className="relative">
+                <input
+                  type="password"
+                  placeholder="Password"
+                  className="input input-bordered w-full"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+                <span
+                  className="absolute right-3 top-3 text-gray-600 cursor-pointer"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                </span>
+              </div>
+              <div className="relative">
+                <input
+                  type="password"
+                  placeholder="Confirm Password"
+                  className="input input-bordered w-full"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  required
+                />
+                <span
+                  className="absolute right-3 top-3 text-gray-600 cursor-pointer"
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                >
+                  {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+                </span>
+              </div>
               <div className="flex justify-end mt-4">
                 <button
                   type="button"

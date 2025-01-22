@@ -1,8 +1,8 @@
 "use client";
 
 import { signIn } from "next-auth/react";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 
@@ -12,93 +12,115 @@ const LoginForm = () => {
   const [error, setError] = useState("");
 
   const router = useRouter();
+  const searchParams = useSearchParams();
+
+  // Check if there's an error in the URL
+  React.useEffect(() => {
+    const errorParam = searchParams.get("error");
+    if (errorParam) {
+      setError("Invalid email or password. Please try again.");
+    }
+  }, [searchParams]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      const res = await signIn("credentials", {
-        email,
-        password,
-        redirect: false,
-      });
+    const res = await signIn("credentials", {
+      email,
+      password,
+      redirect: false, // Prevent automatic redirect
+    });
 
-      if (res.error) {
-        setError("Invalid Credentials");
-        return;
-      }
-
-      router.replace("/dashboard");
-    } catch (error) {
-      console.log("Sign In Error: ", error);
+    if (res.error) {
+      setError("Invalid email or password. Please try again.");
+      return;
     }
+
+    router.push("/dashboard"); // Redirect to dashboard on successful login
   };
 
   return (
-    <div className="card card-compact bg-base-100 w-96 ">
-      <div className="card-body">
-        <h1 className="card-title m-auto text-2xl">Sign in to your account</h1>
-
-        <button className="btn" onClick={() => signIn("google")}>
-          <FcGoogle />
-          Sign in with Google
-        </button>
-        <div className="flex w-full items-center gap-2 text-sm text-slate-600">
-          <div className="h-px w-full bg-slate-200"></div>
-          <span className="text-white">OR</span>
-          <div className="h-px w-full bg-slate-200"></div>
+    <div className="bg-coolWhite min-h-screen flex justify-center  w-full">
+      <div className="bg-coolWhite p-8 w-full max-w-lg">
+        <div className="text-center my-6">
+          <h1 className="text-primary text-3xl font-bold">
+            Sign in to your Account
+          </h1>
+          <p className="text-neutral mb-6">
+            Welcome back! Please log in to your account to continue.
+          </p>
         </div>
+        <form className="space-y-6" onSubmit={handleSubmit}>
+          {/* Google Sign In */}
+          <button
+            type="button"
+            className="btn btn-outline w-full flex items-center justify-center gap-2"
+            onClick={() => signIn("google")}
+          >
+            <FcGoogle size={20} />
+            Sign in with Google
+          </button>
 
-        <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-          <label className="form-control w-full max-w-xs">
-            <div className="label">
-              <span className="label-text">Email</span>
-            </div>
-            <input
-              type="text"
-              placeholder="name@domain.com"
-              className="input input-bordered w-full max-w-xs"
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </label>
-          <label className="form-control w-full max-w-xs">
-            <div className="label">
-              <span className="label-text">Password</span>
-            </div>
-            <input
-              type="password"
-              placeholder="*******"
-              className="input input-bordered w-full max-w-xs"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </label>
-          <div className="flex justify-between">
-            <div>
-              <label className="label cursor-pointer">
-                <div className="flex gap-2 items-center">
-                  <input type="checkbox" className="checkbox" />
-                  <span className="label-text">Remember me</span>
-                </div>
-              </label>
-            </div>
-            <div className="flex items-center">
-              <Link href="/forgotPassword" className="text-blue-500">
-                Forgot Password?
-              </Link>
-            </div>
+          {/* Divider */}
+          <div className="flex w-full items-center gap-2 text-sm text-slate-600">
+            <div className="h-px w-full bg-slate-200"></div>
+            <span className="text-neutral">OR</span>
+            <div className="h-px w-full bg-slate-200"></div>
           </div>
-          <button className="btn sm:btn-sm md:btn-md">Login</button>
-          <div>
-            <span className="text-sm">
-              Don't have an account yet?{" "}
-              <Link href="/register" className="text-blue-500 hover:underline">
-                Sign up
-              </Link>
-            </span>
-          </div>
+
+          {/* Email Field */}
+          <input
+            type="email"
+            placeholder="Email Address"
+            className="input input-bordered w-full"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+
+          {/* Password Field */}
+          <input
+            type="password"
+            placeholder="Password"
+            className="input input-bordered w-full"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+
+          {/* Error Message */}
           {error && (
             <div className="text-xs text-red-500 text-center">{error}</div>
           )}
+
+          {/* Remember Me & Forgot Password */}
+          <div className="flex justify-between items-center">
+            <label className="label cursor-pointer flex gap-2 items-center">
+              <input type="checkbox" className="checkbox" />
+              <span className="label-text">Remember me</span>
+            </label>
+            <Link
+              href="/forgotPassword"
+              className="text-blue-500 hover:underline"
+            >
+              Forgot Password?
+            </Link>
+          </div>
+
+          {/* Login Button */}
+          <button type="submit" className="btn btn-primary w-full">
+            Sign In
+          </button>
+
+          {/* Sign Up Option */}
+          <div className="text-center">
+            <span className="text-sm">
+              Don't have an account?{" "}
+              <Link href="/register" className="text-blue-500 hover:underline">
+                Register
+              </Link>
+            </span>
+          </div>
         </form>
       </div>
     </div>
