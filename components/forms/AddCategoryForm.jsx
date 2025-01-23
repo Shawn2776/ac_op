@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 
-export default function AddCategoryComponent() {
+export default function AddCategoryForm() {
   const [categories, setCategories] = useState([]); // To store fetched categories
   const [category, setCategory] = useState({ name: "", description: "" });
 

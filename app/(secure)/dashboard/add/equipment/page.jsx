@@ -1,8 +1,8 @@
-import AddEquipmentComponent from "@/components/AddEquipmentComponent";
+import AddEquipmentForm from "@/components/forms/AddEquipmentForm";
 import React from "react";
 
 const AddEquipmentPage = () => {
-  return <AddEquipmentComponent />;
+  return <AddEquipmentForm />;
 };
 
 export default AddEquipmentPage;

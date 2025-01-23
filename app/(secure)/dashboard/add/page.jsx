@@ -1,4 +1,4 @@
-import AddEquipmentComponent from "@/components/AddEquipmentComponent";
+import AddEquipmentComponent from "@/components/forms/AddEquipmentForm";
 import React from "react";
 
 const AddEquipmentPage = () => {

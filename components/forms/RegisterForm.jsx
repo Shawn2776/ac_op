@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
-const RegisterForm2 = () => {
+const RegisterForm = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -604,4 +604,4 @@ const RegisterForm2 = () => {
   );
 };
 
-export default RegisterForm2;
+export default RegisterForm;

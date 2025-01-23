@@ -52,21 +52,21 @@ const LoginForm = () => {
         </div>
         <form className="space-y-6" onSubmit={handleSubmit}>
           {/* Google Sign In */}
-          <button
+          {/* <button
             type="button"
             className="btn btn-outline w-full flex items-center justify-center gap-2"
             onClick={() => signIn("google")}
           >
             <FcGoogle size={20} />
             Sign in with Google
-          </button>
+          </button> */}
 
           {/* Divider */}
-          <div className="flex w-full items-center gap-2 text-sm text-slate-600">
+          {/* <div className="flex w-full items-center gap-2 text-sm text-slate-600">
             <div className="h-px w-full bg-slate-200"></div>
             <span className="text-neutral">OR</span>
             <div className="h-px w-full bg-slate-200"></div>
-          </div>
+          </div> */}
 
           {/* Email Field */}
           <input

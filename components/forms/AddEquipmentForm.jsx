@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 
-export default function AddEquipmentComponent() {
+export default function AddEquipmentForm() {
   const [categories, setCategories] = useState([]); // To store fetched categories
   const [equipment, setEquipment] = useState({
     name: "",
