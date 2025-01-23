@@ -2,6 +2,22 @@ import { connectMongoDB } from "@/lib/mongodb";
 import User from "@/models/User";
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
+import crypto from "crypto";
+
+const algorithm = "aes-256-cbc";
+const encryptionKey = process.env.ENCRYPTION_KEY; // Must be 32 bytes
+const iv = crypto.randomBytes(16);
+
+function encrypt(text) {
+  const cipher = crypto.createCipheriv(
+    algorithm,
+    Buffer.from(encryptionKey),
+    iv
+  );
+  let encrypted = cipher.update(text);
+  encrypted = Buffer.concat([encrypted, cipher.final()]);
+  return `${iv.toString("hex")}:${encrypted.toString("hex")}`;
+}
 
 export async function POST(req) {
   try {
@@ -27,6 +43,9 @@ export async function POST(req) {
 
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Encrypt the DL number
+    const encryptedDL = encrypt(driversLicenseNumber);
 
     // Connect to MongoDB
     await connectMongoDB();
@@ -54,7 +73,7 @@ export async function POST(req) {
       addrState,
       zipCode,
       primaryPhoneNumber,
-      driversLicenseNumber,
+      driversLicenseNumber: encryptedDL,
       birthDate,
       expirationDate,
       dlState,
